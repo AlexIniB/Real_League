@@ -1,16 +1,18 @@
 /* ==========================================================
    REAL LEAGUE - Hoja de estilos principal
+   (los media queries están todos al final, de mayor a menor)
    ========================================================== */
 
 /* ---------- VARIABLES ---------- */
 :root {
-    /* Las 4 primeras las modifica el JavaScript al hacer scroll */
+    /* Estas 5 las modifica el JavaScript al hacer scroll */
     --progreso: 0;
     --inclinacion: 0deg;
     --elevacion: 0px;
     --zoom: 1;
-    --levantar: 0;   /* 0 = logo tumbado, 1 = logo de pie */
+    --levantar: 0; /* 0 = logo tumbado, 1 = logo de pie */
 
+    /* Colores */
     --verde-neon: #7cff83;
     --verde-claro: #8dff91;
     --color-texto: #f4f7f1;
@@ -19,9 +21,7 @@
 }
 
 /* ---------- RESET Y BASE ---------- */
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
     scroll-behavior: smooth;
@@ -55,8 +55,7 @@ body {
     isolation: isolate;
     perspective: 1400px;
     perspective-origin: 50% 43%;
-    background:
-        radial-gradient(ellipse at 50% 68%, rgba(30, 76, 40, 0.18), transparent 45%),
+    background: radial-gradient(ellipse at 50% 68%, rgba(30, 76, 40, 0.18), transparent 45%),
         linear-gradient(#020604 0%, #07100a 70%, #020503 100%);
 }
 
@@ -64,96 +63,90 @@ body {
 .cabecera {
     position: absolute;
     z-index: 20;
-    top: 0;
-    left: 0;
-    right: 0;
+    inset: 0 0 auto 0;
     height: 76px;
     padding: 0 clamp(18px, 5vw, 72px);
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent);
-}
 
-.logo-marca {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+    .logo-marca {
+        display: flex;
+        align-items: center;
+        gap: 12px;
 
-.escudo-cabecera {
-    display: block;
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(56, 255, 85, 0.65));
-}
+        .escudo-cabecera {
+            display: block;
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(56, 255, 85, 0.65));
+        }
 
-.nombre-marca {
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 0.13em;
+        .nombre-marca {
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 0.13em;
+        }
+    }
 }
 
 /* ---------- TEXTOS ---------- */
-.texto-bienvenida {
-    position: absolute;
-    z-index: 8;
-    top: 17%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    text-align: center;
-    pointer-events: none;
-    opacity: calc(1 - var(--progreso) * 1.7);
-}
-
-.subtitulo {
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.35em;
-    color: #9aff9d;
-}
-
-.titulo-principal {
-    margin: 14px 0 10px;
-    font-size: clamp(32px, 6vw, 76px);
-    line-height: 0.95;
-    letter-spacing: -0.055em;
-    text-shadow: 0 8px 35px #000;
-}
-
-
+/* Lo que comparten los dos textos centrados */
+.texto-bienvenida,
 .texto-final {
     position: absolute;
-    z-index: 9;
     left: 50%;
-    bottom: 13%;
     transform: translateX(-50%);
     text-align: center;
-    white-space: nowrap;
-    opacity: 0;
     pointer-events: none;
 }
 
-.texto-final strong {
-    font-size: clamp(18px, 3vw, 32px);
-    letter-spacing: 0.12em;
-    text-shadow: 0 4px 20px #000;
+.texto-bienvenida {
+    z-index: 8;
+    top: 17%;
+    width: 90%;
+    opacity: calc(1 - var(--progreso) * 1.7);
+
+    .subtitulo {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.35em;
+        color: #9aff9d;
+    }
+
+    .titulo-principal {
+        margin: 14px 0 10px;
+        font-size: clamp(32px, 6vw, 76px);
+        line-height: 0.95;
+        letter-spacing: -0.055em;
+        text-shadow: 0 8px 35px #000;
+    }
 }
 
-.texto-final p {
-    margin: 6px 0 0;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: #b9cbb8;
+.texto-final {
+    z-index: 9;
+    bottom: 13%;
+    white-space: nowrap;
+    opacity: 0;
+
+    & strong {
+        font-size: clamp(18px, 3vw, 32px);
+        letter-spacing: 0.12em;
+        text-shadow: 0 4px 20px #000;
+    }
+
+    & p {
+        margin: 6px 0 0;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: #b9cbb8;
+    }
 }
 
 @keyframes rueda {
-    to {
-        transform: translateY(8px);
-        opacity: 0;
-    }
+    to { transform: translateY(8px); opacity: 0; }
 }
 
 .barra-progreso {
@@ -168,19 +161,30 @@ body {
 }
 
 /* ---------- MUNDO 3D Y CAMPO ---------- */
+/* Los pseudoelementos decorativos tienen esto en común */
+.campo::before,
+.logo-vivo::before,
+.boton-seccion::before,
+.boton-seccion::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
 .mundo {
     position: absolute;
     left: 50%;
     top: 49%;
     width: min(88vw, 1120px, 150vh);
     aspect-ratio: 1.78;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) rotateX(var(--inclinacion)) translateY(var(--elevacion)) scale(var(--zoom));
+    will-change: transform;
+
     /* medidas del logo (cambian en movil/tablet) */
     --logo-tam: clamp(112px, 15vw, 185px);
     --logo-subida: 39%;
     --logo-altura: 55px;
-    transform-style: preserve-3d;
-    transform: translate(-50%, -50%) rotateX(var(--inclinacion)) translateY(var(--elevacion)) scale(var(--zoom));
-    will-change: transform;
 }
 
 .campo {
@@ -190,21 +194,17 @@ body {
     transform-style: preserve-3d;
     border: 2px solid rgba(224, 244, 207, 0.85);
     border-radius: 4px;
-    background:
-        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.10) 0 8.33%, rgba(255, 255, 255, 0.025) 8.33% 16.66%),
+    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.10) 0 8.33%, rgba(255, 255, 255, 0.025) 8.33% 16.66%),
         repeating-linear-gradient(0deg, rgba(12, 48, 19, 0.18) 0 10%, rgba(75, 130, 48, 0.10) 10% 20%),
         linear-gradient(135deg, #347b32, #164b20 48%, #286c2b);
     box-shadow: 0 0 45px rgba(56, 255, 86, 0.15), 0 28px 65px rgba(0, 0, 0, 0.65);
-}
 
-/* Franjas del cesped */
-.campo::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.25;
-    pointer-events: none;
-    background: repeating-linear-gradient(90deg, transparent 0 12.5%, rgba(0, 0, 0, 0.22) 12.5% 25%);
+    /* Franjas del cesped */
+    &::before {
+        inset: 0;
+        opacity: 0.25;
+        background: repeating-linear-gradient(90deg, transparent 0 12.5%, rgba(0, 0, 0, 0.22) 12.5% 25%);
+    }
 }
 
 /* ---------- LINEAS DEL CAMPO ---------- */
@@ -212,77 +212,67 @@ body {
     position: absolute;
     inset: 2.5%;
     border: 2px solid var(--color-linea);
-}
 
-.linea-medio {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    border-left: 2px solid var(--color-linea);
-}
+    /* Todas las lineas son absolutas y comparten el borde */
+    .linea-medio,
+    .circulo-central,
+    .punto-central,
+    .area-grande,
+    .area-pequena,
+    .penalti { position: absolute; }
 
-.circulo-central {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 18%;
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    border: 2px solid var(--color-linea);
-    border-radius: 50%;
-}
+    .circulo-central,
+    .area-grande,
+    .area-pequena,
+    .penalti { border: 2px solid var(--color-linea); }
 
-.punto-central {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 7px;
-    height: 7px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: #efffe6;
-}
+    .linea-medio {
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        border-left: 2px solid var(--color-linea);
+    }
 
-.area-grande {
-    position: absolute;
-    top: 25%;
-    width: 16%;
-    height: 50%;
-    border: 2px solid var(--color-linea);
-}
+    /* El circulo y el punto van centrados */
+    .circulo-central,
+    .punto-central {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+    }
 
-.area-pequena {
-    position: absolute;
-    top: 38%;
-    width: 6%;
-    height: 24%;
-    border: 2px solid var(--color-linea);
-}
+    .circulo-central {
+        width: 18%;
+        aspect-ratio: 1;
+    }
 
-.area-grande.izquierda,
-.area-pequena.izquierda {
-    left: -1px;
-    border-left: 0;
-}
+    .punto-central {
+        width: 7px;
+        height: 7px;
+        background: #efffe6;
+    }
 
-.area-grande.derecha,
-.area-pequena.derecha {
-    right: -1px;
-    border-right: 0;
-}
+    /* Las areas tienen la misma forma, cambia el tamaño */
+    .area-grande,
+    .area-pequena {
+        &.izquierda { left: -1px; border-left: 0; }
+        &.derecha { right: -1px; border-right: 0; }
+    }
 
-.penalti {
-    position: absolute;
-    top: 39%;
-    width: 2%;
-    height: 22%;
-    border: 2px solid var(--color-linea);
-    border-radius: 50%;
-}
+    .area-grande { top: 25%; width: 16%; height: 50%; }
+    .area-pequena { top: 38%; width: 6%; height: 24%; }
 
-.penalti.izquierda { left: 12%; }
-.penalti.derecha   { right: 12%; }
+    .penalti {
+        top: 39%;
+        width: 2%;
+        height: 22%;
+        border-radius: 50%;
+
+        &.izquierda { left: 12%; }
+        &.derecha { right: 12%; }
+    }
+}
 
 /* ---------- LOGO (SE LEVANTA) Y LATIDO ---------- */
 .logo-vivo {
@@ -294,33 +284,31 @@ body {
     aspect-ratio: 1;
     transform-style: preserve-3d;
     transform-origin: 50% 100%;
-    transform:
-        translate(-50%, -50%)
+
+    /* contrarresta la inclinación del campo: el logo siempre mira de frente */
+    transform: translate(-50%, -50%)
         translateZ(calc(18px + var(--levantar) * var(--logo-altura)))
-        rotateX(calc(var(--inclinacion) * -1));  /* contrarresta la inclinación del campo: el logo siempre mira de frente */
-}
+        rotateX(calc(var(--inclinacion) * -1));
 
-.logo-campo {
-    transform: translateZ(2px);
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #fff3df;
-    box-shadow: 0 0 10px rgba(91, 255, 108, 0.8);
-}
+    /* Brillo verde alrededor del logo (más grande que el propio logo) */
+    &::before {
+        inset: -38%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(91, 255, 108, 0.55) 0%, rgba(76, 255, 107, 0.22) 38%, transparent 68%);
+    }
 
-/* Brillo verde alrededor del logo (más grande que el propio logo) */
-.logo-vivo::before {
-    content: "";
-    position: absolute;
-    inset: -38%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(91, 255, 108, 0.55) 0%, rgba(76, 255, 107, 0.22) 38%, transparent 68%);
-    pointer-events: none;
+    .logo-campo {
+        transform: translateZ(2px);
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #fff3df;
+        box-shadow: 0 0 10px rgba(91, 255, 108, 0.8);
+    }
 }
 
 /* Latido: una linea de electrocardiograma a cada lado del logo */
@@ -334,18 +322,20 @@ body {
     transform: translate(-50%, -50%) translateZ(1px);
     overflow: visible;
     pointer-events: none;
+
+    & path {
+        fill: none;
+        stroke: var(--verde-neon);
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+    }
 }
 
-.latido path {
-    fill: none;
-    stroke: var(--verde-neon);
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
-}
-
-.latido-base { stroke-width: 9; opacity: 0.16; }  /* brillo suave detrás de la línea */
+/* brillo suave detrás de la línea */
+/* OJO: se deja fuera de .latido a propósito. Si se anida dentro, el trazo pasa a ser de 9 y cambia el aspecto */
+.latido-base { stroke-width: 9; opacity: 0.16; }
 
 .latido-anim {
     stroke-dasharray: 1;
@@ -353,9 +343,9 @@ body {
 }
 
 @keyframes pulso-latido {
-    0%   { stroke-dashoffset: 1; opacity: 1; }
-    55%  { stroke-dashoffset: 0; opacity: 1; }
-    85%  { stroke-dashoffset: 0; opacity: 0.9; }
+    0% { stroke-dashoffset: 1; opacity: 1; }
+    55% { stroke-dashoffset: 0; opacity: 1; }
+    85% { stroke-dashoffset: 0; opacity: 0.9; }
     100% { stroke-dashoffset: 0; opacity: 0; }
 }
 
@@ -379,80 +369,73 @@ body {
     transform: translateZ(45px) rotateX(-90deg) scale(0.65);
     backface-visibility: visible;
     transition: border-color 0.2s, background 0.2s;
-}
 
-/* Palito luminoso que une el icono con el campo */
-.boton-seccion::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    width: 3px;
-    height: clamp(18px, 3vw, 34px);
-    transform: translateX(-50%);
-    transform-origin: top;
-    background: linear-gradient(#8dff91, rgba(65, 255, 92, 0.08));
-    box-shadow: 0 0 12px #63ff70, 0 0 24px #39ff57;
-    opacity: 0.9;
-    pointer-events: none;
-}
+    /* Palito luminoso que une el icono con el campo */
+    &::before {
+        left: 50%;
+        top: 100%;
+        width: 3px;
+        height: clamp(18px, 3vw, 34px);
+        transform: translateX(-50%);
+        transform-origin: top;
+        background: linear-gradient(#8dff91, rgba(65, 255, 92, 0.08));
+        box-shadow: 0 0 12px #63ff70, 0 0 24px #39ff57;
+        opacity: 0.9;
+    }
 
-/* Sombra brillante en el suelo */
-.boton-seccion::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: calc(100% + clamp(17px, 3vw, 32px));
-    width: 75%;
-    height: 10px;
-    transform: translateX(-50%) rotateX(68deg);
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(115, 255, 130, 0.67) 0%, rgba(50, 255, 75, 0.27) 42%, transparent 72%);
-    filter: blur(3px);
-    pointer-events: none;
-}
+    /* Sombra brillante en el suelo */
+    &::after {
+        left: 50%;
+        top: calc(100% + clamp(17px, 3vw, 32px));
+        width: 75%;
+        height: 10px;
+        transform: translateX(-50%) rotateX(68deg);
+        border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(115, 255, 130, 0.67) 0%, rgba(50, 255, 75, 0.27) 42%, transparent 72%);
+        filter: blur(3px);
+    }
 
-.boton-seccion img {
-    display: block;
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 9px rgba(97, 255, 120, 0.67));
-}
+    & img {
+        display: block;
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+        filter: drop-shadow(0 0 9px rgba(97, 255, 120, 0.67));
+        transition: transform 0.25s;
+    }
 
-.boton-seccion span {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 0.15em;
-    white-space: nowrap;
-    text-shadow: 0 2px 8px #000;
-}
+    & span {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.15em;
+        white-space: nowrap;
+        text-shadow: 0 2px 8px #000;
+    }
 
-.boton-seccion:hover,
-.boton-seccion:focus-visible {
-    border-color: var(--verde-claro);
-    background: #173d20;
-    outline: none;
+    /* Efecto al pasar el raton por los iconos */
+    &:hover,
+    &:focus-visible {
+        border-color: var(--verde-claro);
+        background: #173d20;
+        outline: none;
+
+        & img { transform: scale(1.15); }
+    }
 }
 
 /* Posicion de cada boton sobre el campo */
-.btn-jugadores     { left: 8%;   top: 52%; }
-.btn-clasificacion { left: 34%;  top: 12%; }
-.btn-noticias      { right: 22%; top: 13%; }
-.btn-calendario    { left: 32%;  bottom: 9%; }
-.btn-trofeos       { right: 10%; bottom: 10%; }
-
-/* ---------- EFECTO AL PASAR EL RATON POR LOS ICONOS ---------- */
-.boton-seccion img { transition: transform 0.25s; }
-.boton-seccion:hover img,
-.boton-seccion:focus-visible img { transform: scale(1.15); }
+.btn-jugadores { left: 8%; top: 52%; }
+.btn-clasificacion { left: 34%; top: 12%; }
+.btn-noticias { right: 22%; top: 13%; }
+.btn-calendario { left: 32%; bottom: 9%; }
+.btn-trofeos { right: 10%; bottom: 10%; }
 
 /* ==========================================================
-   RESPONSIVE
+   RESPONSIVE (de mayor a menor tamaño)
    ========================================================== */
 
 /* ---------- TABLET (horizontal y pantallas medianas) ---------- */
@@ -460,7 +443,6 @@ body {
     .cabecera { height: 68px; }
     .mundo { width: min(92vw, 150vh); }
     .boton-seccion { width: clamp(70px, 10vw, 100px); }
-    .boton-seccion span { font-size: 10px; }
 }
 
 /* ---------- MOVIL Y TABLET EN VERTICAL: campo en vertical ---------- */
@@ -479,97 +461,156 @@ body {
     .campo { box-shadow: 0 28px 65px rgba(0, 0, 0, 0.65); }
 
     /* Las lineas del campo se giran 90 grados */
-    .linea-medio {
-        top: 50%;
-        bottom: auto;
-        left: 0;
-        right: 0;
-        border-left: 0;
-        border-top: 2px solid var(--color-linea);
+    .lineas-campo {
+        .linea-medio {
+            top: 50%;
+            bottom: auto;
+            left: 0;
+            right: 0;
+            border-left: 0;
+            border-top: 2px solid var(--color-linea);
+        }
+
+        .circulo-central { width: 34%; }
+
+        .area-grande,
+        .area-pequena {
+            top: auto;
+
+            /* Porteria de arriba (antes "izquierda") */
+            &.izquierda {
+                top: -1px;
+                border: 2px solid var(--color-linea);
+                border-top: 0;
+            }
+
+            /* Porteria de abajo (antes "derecha") */
+            &.derecha {
+                bottom: -1px;
+                right: auto;
+                border: 2px solid var(--color-linea);
+                border-bottom: 0;
+            }
+        }
+
+        /* El left de .izquierda hay que repetirlo porque pesa mas */
+        .area-grande {
+            left: 25%;
+            width: 50%;
+            height: 14%;
+
+            &.izquierda { left: 25%; }
+        }
+
+        .area-pequena {
+            left: 37%;
+            width: 26%;
+            height: 6%;
+
+            &.izquierda { left: 37%; }
+        }
     }
-
-    .circulo-central { width: 34%; }
-
-    .area-grande,
-    .area-pequena {
-        top: auto;
-        bottom: auto;
-        right: auto;
-        border: 2px solid var(--color-linea);
-    }
-
-    .area-grande { left: 25%; width: 50%; height: 14%; }
-    .area-pequena { left: 37%; width: 26%; height: 6%; }
-
-    /* Portería de arriba (antes "izquierda") */
-    .area-grande.izquierda,
-    .area-pequena.izquierda {
-        top: -1px;
-        bottom: auto;
-        right: auto;
-        border: 2px solid var(--color-linea);
-        border-top: 0;
-    }
-
-    /* Portería de abajo (antes "derecha") */
-    .area-grande.derecha,
-    .area-pequena.derecha {
-        top: auto;
-        bottom: -1px;
-        right: auto;
-        border: 2px solid var(--color-linea);
-        border-bottom: 0;
-    }
-
-    .area-grande.izquierda,
-    .area-grande.derecha { left: 25%; }
-
-    .area-pequena.izquierda,
-    .area-pequena.derecha { left: 37%; }
 
     /* Botones repartidos por el campo vertical */
     .boton-seccion { width: clamp(62px, 19vw, 110px); }
-    .btn-trofeos       { left: 6%;   right: auto; top: 27%; bottom: auto; }
-    .btn-noticias      { right: 6%;  left: auto;  top: 27%; bottom: auto; }
-    .btn-clasificacion { left: 9%;   right: auto; top: 50%; bottom: auto; }
-    .btn-calendario    { right: 9%;  left: auto;  top: 50%; bottom: auto; }
-    .btn-jugadores     { left: calc(50% - clamp(31px, 9.5vw, 55px)); right: auto; top: 72%; bottom: auto; }
+
+    .btn-trofeos {
+        left: 6%;
+        right: auto;
+        top: 27%;
+        bottom: auto;
+    }
+
+    .btn-noticias {
+        right: 6%;
+        top: 27%;
+    }
+
+    .btn-clasificacion {
+        left: 9%;
+        top: 50%;
+    }
+
+    .btn-calendario {
+        left: auto;
+        right: 9%;
+        top: 50%;
+        bottom: auto;
+    }
+
+    .btn-jugadores {
+        left: calc(50% - clamp(31px, 9.5vw, 55px));
+        top: 72%;
+    }
 }
 
 /* ---------- MOVIL ---------- */
 @media (max-width: 650px) {
-    .cabecera { height: 62px; padding: 0 14px; }
-    .escudo-cabecera { width: 36px; height: 36px; }
-    .nombre-marca { font-size: 12px; }
-    .menu-principal { gap: 12px; }
-    .menu-principal a { font-size: 9px; letter-spacing: 0.1em; }
+    .cabecera {
+        height: 62px;
+        padding: 0 14px;
 
-    .subtitulo { display: none; }
-    .texto-final strong { display: none; }
-    .texto-final p { display: none; }
+        .logo-marca {
+            .escudo-cabecera {
+                width: 36px;
+                height: 36px;
+            }
 
-    .boton-seccion { border-radius: 14px; }
-    .boton-seccion span { font-size: 9px; letter-spacing: 0.1em; }
+            .nombre-marca { font-size: 12px; }
+        }
+    }
+
+    .menu-principal {
+        gap: 12px;
+
+        & a {
+            font-size: 9px;
+            letter-spacing: 0.1em;
+        }
+    }
+
+    .texto-bienvenida .subtitulo { display: none; }
+
+    .texto-final {
+        & strong,
+        & p { display: none; }
+    }
+
+    .boton-seccion {
+        border-radius: 14px;
+
+        & span {
+            font-size: 9px;
+            letter-spacing: 0.1em;
+        }
+    }
 }
 
 @media (max-width: 480px) {
-    .nombre-marca { display: none; }
+    .cabecera .logo-marca .nombre-marca { display: none; }
     .menu-principal { gap: 14px; }
 }
 
 /* ---------- MOVIL EN HORIZONTAL (poca altura) ---------- */
 @media (orientation: landscape) and (max-height: 520px) {
     .cabecera { height: 52px; }
-    .mundo { width: min(80vw, 140vh); top: 56%; }
-    .boton-seccion { width: clamp(46px, 9vh, 64px); border-radius: 10px; }
-    .boton-seccion span { font-size: 8px; }
-    .titulo-principal { font-size: 28px; }
+
+    .mundo {
+        width: min(80vw, 140vh);
+        top: 56%;
+    }
+
+    .boton-seccion {
+        width: clamp(46px, 9vh, 64px);
+        border-radius: 10px;
+
+        & span { font-size: 8px; }
+    }
+
+    .texto-bienvenida .titulo-principal { font-size: 28px; }
 }
 
 /* ---------- ACCESIBILIDAD: menos movimiento ---------- */
 @media (prefers-reduced-motion: reduce) {
-    * {
-        scroll-behavior: auto !important;
-        animation: none !important;
-    }
+    * { scroll-behavior: auto; animation: none; }
 }

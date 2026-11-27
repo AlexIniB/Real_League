@@ -2,6 +2,7 @@
    REAL LEAGUE - Página de Clasificación
    Sigue la guía de estilos: colores, Bebas Neue y escala de
    espaciado (4 / 8 / 16 / 24 / 32 / 48 px)
+   (los media queries están todos al final, de mayor a menor)
    ========================================================== */
 
 /* ---------- VARIABLES (guía de estilos) ---------- */
@@ -30,14 +31,11 @@
     --cuerpo: 16px;
     --dato: 20px;
     --etiqueta: 12px;
-
     --fuente: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
 }
 
 /* ---------- RESET Y BASE ---------- */
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
     background: var(--fondo);
@@ -58,20 +56,11 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-img {
-    display: block;
-    max-width: 100%;
-}
+img { display: block; max-width: 100%; }
 
 /* Barra de scroll verde, como en el prototipo */
-::-webkit-scrollbar {
-    width: 14px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--fondo);
-}
-
+::-webkit-scrollbar { width: 14px; }
+::-webkit-scrollbar-track { background: var(--fondo); }
 ::-webkit-scrollbar-thumb {
     border: 3px solid var(--fondo);
     border-radius: 10px;
@@ -117,13 +106,15 @@ img {
     padding: 0 var(--m);
 }
 
-.nav-logo { flex-shrink: 0; }
+.nav-logo {
+    flex-shrink: 0;
 
-.nav-logo img {
-    width: 52px;
-    height: 52px;
-    object-fit: cover;
-    border-radius: 50%;
+    & img {
+        width: 52px;
+        height: 52px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
 }
 
 .nav-lista {
@@ -145,10 +136,8 @@ img {
     font-size: var(--h3);
     letter-spacing: 0.06em;
     transition: color 0.2s;
-}
 
-.nav-enlace:hover {
-    color: var(--verde);
+    &:hover { color: var(--verde); }
 }
 
 /* En escritorio solo el icono activo se ve como imagen */
@@ -158,17 +147,20 @@ img {
     object-fit: contain;
 }
 
-.nav-item-activo .nav-icono {
-    display: block;
-    height: 60px;
-}
+/* El icono de la sección activa se ve más grande y sin texto */
+.nav-item-activo {
+    .nav-icono {
+        display: block;
+        height: 60px;
+    }
 
-.nav-item-activo .nav-texto {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
+    .nav-texto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
 }
 
 /* ==========================================================
@@ -181,7 +173,7 @@ img {
 }
 
 .titulo-pagina {
-    margin: var(--l) 0 var(--l);
+    margin: var(--l) 0;
     text-align: center;
     font-size: var(--h1);
     font-weight: 400;
@@ -190,9 +182,7 @@ img {
 }
 
 /* ---------- TABLA ---------- */
-.contenedor-tabla {
-    overflow-x: auto;
-}
+.contenedor-tabla { overflow-x: auto; }
 
 .tabla-clasificacion {
     width: 100%;
@@ -201,77 +191,51 @@ img {
     border-collapse: separate;
     border-spacing: 0 6px;
     text-align: center;
+
+    & abbr { text-decoration: none; cursor: help; }
+
+    & th {
+        padding: var(--xs) var(--s);
+        color: var(--texto-suave);
+        font-size: var(--cuerpo);
+        font-weight: 400;
+        letter-spacing: 0.08em;
+    }
+
+    & td {
+        height: 52px;
+        padding: 0 var(--s);
+        background: var(--elevada);
+        font-size: var(--dato);
+        transition: background 0.2s;
+
+        &:first-child { border-radius: 8px 0 0 8px; }
+        &:last-child { border-radius: 0 8px 8px 0; }
+
+        /* Los puntos son el dato importante: único texto en verde */
+        &.col-puntos { color: var(--verde); font-size: var(--h3); }
+    }
+
+    & tbody tr:hover td { background: #26372d; }
+
+    & .texto-corto { display: none; }
 }
 
-.tabla-clasificacion abbr {
-    text-decoration: none;
-    cursor: help;
-}
-
-.tabla-clasificacion th {
-    padding: var(--xs) var(--s);
-    color: var(--texto-suave);
-    font-size: var(--cuerpo);
-    font-weight: 400;
-    letter-spacing: 0.08em;
-}
-
-.tabla-clasificacion td {
-    height: 52px;
-    padding: 0 var(--s);
-    background: var(--elevada);
-    font-size: var(--dato);
-    transition: background 0.2s;
-}
-
-.tabla-clasificacion td:first-child {
-    border-radius: 8px 0 0 8px;
-}
-
-.tabla-clasificacion td:last-child {
-    border-radius: 0 8px 8px 0;
-}
-
-.tabla-clasificacion tbody tr:hover td {
-    background: #26372d;
-}
-
-.col-pos {
-    width: 56px;
-}
-
-.col-equipo {
-    text-align: left;
-    padding-left: var(--m);
-}
-
-.tabla-clasificacion th.col-equipo,
-.tabla-clasificacion td.col-equipo {
-    text-align: left;
-}
+.col-pos { width: 56px; }
+.col-equipo { text-align: left; padding-left: var(--m); }
 
 .celda-equipo {
     display: flex;
     align-items: center;
     gap: 12px;
     min-width: 190px;
-}
 
-.celda-equipo img {
-    width: 32px;
-    height: 36px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-/* Los puntos son el dato importante: único texto en verde */
-.tabla-clasificacion td.col-puntos {
-    color: var(--verde);
-    font-size: var(--h3);
-}
-
-.tabla-clasificacion .texto-corto {
-    display: none;
+    & img {
+        width: 32px;
+        height: 36px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
 }
 
 .leyenda {
@@ -307,55 +271,55 @@ img {
     border: 1px solid var(--verde-oscuro);
     border-radius: 12px;
     background: var(--superficie);
-}
 
-.jugador-foto {
-    align-self: start;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    border-radius: 8px;
-}
+    .jugador-foto {
+        align-self: start;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        border-radius: 8px;
+    }
 
-.jugador-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: var(--m);
-    text-align: right;
-}
+    .jugador-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: var(--m);
+        text-align: right;
 
-.jugador-nombre {
-    margin: 0;
-    font-size: var(--h2);
-    font-weight: 400;
-    line-height: 1;
-}
+        .jugador-nombre {
+            margin: 0;
+            font-size: var(--h2);
+            font-weight: 400;
+            line-height: 1;
+        }
 
-.jugador-equipo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--s);
-    font-size: var(--h3);
-}
+        .jugador-equipo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: var(--s);
+            font-size: var(--h3);
 
-.jugador-equipo img {
-    width: 28px;
-    height: 32px;
-    object-fit: contain;
-}
+            & img {
+                width: 28px;
+                height: 32px;
+                object-fit: contain;
+            }
+        }
 
-.jugador-posicion {
-    color: var(--texto-suave);
-    font-size: var(--h3);
-}
+        .jugador-posicion {
+            color: var(--texto-suave);
+            font-size: var(--h3);
+        }
 
-.jugador-stats {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--m);
+        .jugador-stats {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--m);
+        }
+    }
 }
 
 .stat {
@@ -365,28 +329,29 @@ img {
     gap: var(--xs);
     font-size: var(--cuerpo);
     color: var(--texto-suave);
-}
 
-.stat-valor {
-    min-width: 60px;
-    padding: var(--xs) var(--s);
-    border: 1px solid var(--texto);
-    border-radius: 4px;
-    color: var(--texto);
-    font-size: var(--h3);
-    text-align: center;
+    .stat-valor {
+        min-width: 60px;
+        padding: var(--xs) var(--s);
+        border: 1px solid var(--texto);
+        border-radius: 4px;
+        color: var(--texto);
+        font-size: var(--h3);
+        text-align: center;
+    }
 }
 
 /* ==========================================================
-   RESPONSIVE
+   RESPONSIVE (de mayor a menor tamaño)
    ========================================================== */
 
 /* ---------- TABLET ---------- */
 @media (max-width: 1024px) {
+    :root { --h1: 44px; }
+
     .navbar { gap: var(--m); }
     .nav-lista { gap: var(--m); }
     .nav-enlace { font-size: 20px; }
-    :root { --h1: 44px; }
 }
 
 /* ---------- MÓVIL: la barra pasa a ser de iconos ---------- */
@@ -404,7 +369,10 @@ img {
         padding: 0 var(--s);
     }
 
-    .nav-logo img { width: 44px; height: 44px; }
+    .nav-logo img {
+        width: 44px;
+        height: 44px;
+    }
 
     .nav-lista {
         justify-content: space-between;
@@ -416,20 +384,22 @@ img {
         display: flex;
         justify-content: center;
         min-width: 0;
+
+        &.nav-item-inicio { display: none; }
     }
 
-    .nav-item-activo { flex-grow: 1.7; }
-    .nav-item.nav-item-inicio { display: none; }
+    .nav-item-activo {
+        flex-grow: 1.7;
+
+        .nav-icono { max-height: 58px; }
+    }
 
     .nav-icono {
         display: block;
-        width: auto;
         max-width: 100%;
         height: auto;
         max-height: 34px;
     }
-
-    .nav-item-activo .nav-icono { max-height: 58px; }
 
     /* El texto desaparece (queda para lectores de pantalla) */
     .nav-texto {
@@ -444,12 +414,28 @@ img {
 
     /* Tabla compacta: solo POS, EQUIPO, DG y PTS */
     .col-extra { display: none; }
-    .tabla-clasificacion .texto-largo { display: none; }
-    .tabla-clasificacion .texto-corto { display: inline; }
     .col-pos { width: 40px; }
-    .tabla-clasificacion td { height: 46px; padding: 0 var(--xs); }
-    .celda-equipo { min-width: 0; gap: var(--s); line-height: 1; }
-    .celda-equipo img { width: 26px; height: 30px; }
+
+    .tabla-clasificacion {
+        & .texto-largo { display: none; }
+        & .texto-corto { display: inline; }
+
+        & td {
+            height: 46px;
+            padding: 0 var(--xs);
+        }
+    }
+
+    .celda-equipo {
+        min-width: 0;
+        gap: var(--s);
+        line-height: 1;
+
+        & img {
+            width: 26px;
+            height: 30px;
+        }
+    }
 
     .leyenda { font-size: 14px; }
 
@@ -457,19 +443,29 @@ img {
         grid-template-columns: 130px 1fr;
         gap: var(--m);
         padding: var(--s);
+
+        .jugador-info {
+            .jugador-equipo img {
+                width: 22px;
+                height: 26px;
+            }
+
+            .jugador-stats { gap: var(--s); }
+        }
     }
 
-    .jugador-equipo img { width: 22px; height: 26px; }
-    .stat-valor { min-width: 48px; }
-    .jugador-stats { gap: var(--s); }
+    .stat .stat-valor { min-width: 48px; }
 }
 
 @media (max-width: 380px) {
-    .tarjeta-jugador { grid-template-columns: 110px 1fr; }
-    .jugador-nombre { font-size: 22px; }
+    .tarjeta-jugador {
+        grid-template-columns: 110px 1fr;
+
+        .jugador-info .jugador-nombre { font-size: 22px; }
+    }
 }
 
 /* ---------- ACCESIBILIDAD: menos movimiento ---------- */
 @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
+    * { transition: none; }
 }

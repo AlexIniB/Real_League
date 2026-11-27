@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clasificación de la Real League: puntos, goles y posición de cada equipo.">
+    <title>Clasificación - Real League</title>
+
+    <!-- Tipografía de la guía de estilos: Bebas Neue -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/clasificacion.css">
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="barra-nav">
+        <nav class="navbar" aria-label="Navegación principal">
+
+            <a class="nav-logo" href="index.html" aria-label="Real League, ir al inicio">
+                <img src="img/logo.jpg" alt="Real League">
+            </a>
+
+            <ul class="nav-lista">
+                <li class="nav-item nav-item-inicio">
+                    <a class="nav-enlace" href="index.html">INICIO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-enlace" href="jugadores.html">
+                        <img class="nav-icono" src="img/icono-jugadores.png" alt="">
+                        <span class="nav-texto">JUGADORES</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-enlace" href="clubes.html">
+                        <img class="nav-icono" src="img/icono-clasificacion.png" alt="">
+                        <span class="nav-texto">CLUBES</span>
+                    </a>
+                </li>
+                <!-- Sección activa: el trofeo se ve más grande que el resto -->
+                <li class="nav-item nav-item-activo">
+                    <a class="nav-enlace" href="clasificacion.html" aria-current="page">
+                        <img class="nav-icono" src="img/icono-trofeos.png" alt="">
+                        <span class="nav-texto">CLASIFICACIÓN</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-enlace" href="noticias.html">
+                        <img class="nav-icono" src="img/icono-noticias.png" alt="">
+                        <span class="nav-texto">NOTICIAS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-enlace" href="calendario.html">
+                        <img class="nav-icono" src="img/icono-calendario.png" alt="">
+                        <span class="nav-texto">CALENDARIO</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+
+        <!-- TABLA DE CLASIFICACIÓN -->
+        <section class="seccion-tabla" aria-labelledby="tituloClasificacion">
+            <h1 class="titulo-pagina" id="tituloClasificacion">CLASIFICACIÓN</h1>
+
+            <div class="contenedor-tabla">
+                <table class="tabla-clasificacion">
+                    <caption class="solo-lectores">Clasificación de la Real League ordenada por puntos</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-pos"><abbr title="Posición">POS</abbr></th>
+                            <th scope="col" class="col-equipo">EQUIPO</th>
+                            <th scope="col" class="col-extra"><abbr title="Partidos jugados">PJ</abbr></th>
+                            <th scope="col" class="col-extra"><abbr title="Partidos ganados">PG</abbr></th>
+                            <th scope="col" class="col-extra"><abbr title="Partidos empatados">PE</abbr></th>
+                            <th scope="col" class="col-extra"><abbr title="Partidos perdidos">PP</abbr></th>
+                            <th scope="col" class="col-extra"><abbr title="Goles a favor">GF</abbr></th>
+                            <th scope="col" class="col-extra"><abbr title="Goles en contra">GC</abbr></th>
+                            <th scope="col" class="col-dg"><abbr title="Diferencia de goles">DG</abbr></th>
+                            <th scope="col" class="col-puntos"><span class="texto-largo">PUNTOS</span><abbr class="texto-corto" title="Puntos">PTS</abbr></th>
+                        </tr>
+                    </thead>
+                    <!-- Las filas las crea clasificacion.js a partir del array "equipos" -->
+                    <tbody id="cuerpoTabla"></tbody>
+                </table>
+            </div>
+
+            <p class="leyenda">
+                PJ partidos jugados · PG ganados · PE empatados · PP perdidos · GF goles a favor · GC goles en contra · DG diferencia de goles
+            </p>
+        </section>
+
+        <!-- JUGADOR DE LA SEMANA -->
+        <section class="seccion-jugador" aria-labelledby="tituloJugador">
+            <h2 class="titulo-jugador" id="tituloJugador">JUGADOR DE LA SEMANA</h2>
+
+            <article class="tarjeta-jugador" id="tarjetaJugador">
+                <!-- Se rellena desde clasificacion.js con el objeto "jugadorSemana" -->
+            </article>
+        </section>
+
+    </main>
+
+    <script src="js/clasificacion.js"></script>
+</body>
+</html>

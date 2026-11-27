@@ -284,19 +284,6 @@ body {
 .penalti.izquierda { left: 12%; }
 .penalti.derecha   { right: 12%; }
 
-.esquina {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--color-linea);
-    border-radius: 50%;
-}
-
-.esquina-1 { top: -9px;    left: -9px; }
-.esquina-2 { top: -9px;    right: -9px; }
-.esquina-3 { bottom: -9px; left: -9px; }
-.esquina-4 { bottom: -9px; right: -9px; }
-
 /* ---------- LOGO (SE LEVANTA) Y LATIDO ---------- */
 .logo-vivo {
     position: absolute;

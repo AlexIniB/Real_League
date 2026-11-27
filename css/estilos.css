@@ -95,49 +95,6 @@ body {
     letter-spacing: 0.13em;
 }
 
-.menu-principal {
-    display: flex;
-    gap: clamp(12px, 2.5vw, 34px);
-}
-
-.menu-principal a {
-    position: relative;
-    padding: 6px 0;
-    color: #d6e0d4;
-    text-decoration: none;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.13em;
-    opacity: 0.8;
-    transition: color 0.2s, opacity 0.2s;
-}
-
-/* Subrayado que aparece al pasar el ratón */
-.menu-principal a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--verde-claro);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s;
-}
-
-.menu-principal a:hover,
-.menu-principal a:focus-visible {
-    color: var(--verde-claro);
-    opacity: 1;
-    outline: none;
-}
-
-.menu-principal a:hover::after,
-.menu-principal a:focus-visible::after {
-    transform: scaleX(1);
-}
-
 /* ---------- TEXTOS ---------- */
 .texto-bienvenida {
     position: absolute;
@@ -196,44 +153,6 @@ body {
     font-size: 11px;
     letter-spacing: 0.18em;
     color: #b9cbb8;
-}
-
-/* ---------- AVISO DE SCROLL Y BARRA DE PROGRESO ---------- */
-.aviso-scroll {
-    position: absolute;
-    z-index: 10;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: #b9c8b8;
-    opacity: 0.85;
-}
-
-.raton {
-    position: relative;
-    width: 17px;
-    height: 25px;
-    border: 1px solid #b9c8b8;
-    border-radius: 12px;
-}
-
-.raton::after {
-    content: "";
-    position: absolute;
-    left: 7px;
-    top: 5px;
-    width: 2px;
-    height: 5px;
-    border-radius: 2px;
-    background: var(--verde-claro);
-    animation: rueda 1.2s infinite;
 }
 
 @keyframes rueda {

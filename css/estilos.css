@@ -123,12 +123,6 @@ body {
     text-shadow: 0 8px 35px #000;
 }
 
-.indicacion-scroll {
-    margin: 0;
-    font-size: clamp(11px, 1.3vw, 15px);
-    letter-spacing: 0.08em;
-    color: var(--color-texto-suave);
-}
 
 .texto-final {
     position: absolute;

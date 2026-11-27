@@ -540,23 +540,6 @@ body {
     .area-pequena.izquierda,
     .area-pequena.derecha { left: 37%; }
 
-    /* Semicírculo que sale de cada área grande */
-    .penalti { left: 39%; right: auto; width: 22%; height: 3%; }
-    .penalti.izquierda {
-        left: 39%;
-        top: calc(14% - 1px);
-        border-top: 0;
-        border-radius: 0 0 50% 50%;
-    }
-    .penalti.derecha {
-        left: 39%;
-        right: auto;
-        top: auto;
-        bottom: calc(14% - 1px);
-        border-bottom: 0;
-        border-radius: 50% 50% 0 0;
-    }
-
     /* Botones repartidos por el campo vertical */
     .boton-seccion { width: clamp(62px, 19vw, 110px); }
     .btn-trofeos       { left: 6%;   right: auto; top: 27%; bottom: auto; }
@@ -574,10 +557,9 @@ body {
     .menu-principal { gap: 12px; }
     .menu-principal a { font-size: 9px; letter-spacing: 0.1em; }
 
-    .subtitulo { font-size: 9px; letter-spacing: 0.25em; }
-    .texto-final strong { font-size: 18px; }
-    .texto-final p { font-size: 9px; letter-spacing: 0.12em; }
-    .aviso-scroll { font-size: 9px; bottom: 18px; }
+    .subtitulo { display: none; }
+    .texto-final strong { display: none; }
+    .texto-final p { display: none; }
 
     .boton-seccion { border-radius: 14px; }
     .boton-seccion span { font-size: 9px; letter-spacing: 0.1em; }
@@ -595,7 +577,6 @@ body {
     .boton-seccion { width: clamp(46px, 9vh, 64px); border-radius: 10px; }
     .boton-seccion span { font-size: 8px; }
     .titulo-principal { font-size: 28px; }
-    .aviso-scroll { display: none; }
 }
 
 /* ---------- ACCESIBILIDAD: menos movimiento ---------- */
